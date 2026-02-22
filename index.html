@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>秋秋网络专线 - 在俄罗斯，也能像在国内一样上网</title>
+    <style>
+        /* 全局样式重置 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', '思源黑体', sans-serif;
+        }
+
+        /* 全局变量 */
+        :root {
+            --primary-color: #165DFF;
+            --secondary-color: #FF4D4F;
+            --accent-color: #00C48C;
+            --text-dark: #1F2937;
+            --text-light: #6B7280;
+            --bg-light: #F9FAFB;
+            --white: #FFFFFF;
+        }
+
+        body {
+            color: var(--text-dark);
+            background-color: var(--bg-light);
+            line-height: 1.6;
+        }
+
+        /* 导航栏 */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 8%;
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .logo span {
+            color: var(--secondary-color);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .nav-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.6rem 1.2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            text-decoration: none;
+        }
+
+        .btn-outline {
+            border: 1px solid var(--primary-color);
+            color: var(--primary-color);
+            background: transparent;
+        }
+
+        .btn-outline:hover {
+            background-color: var(--primary-color);
+            color: var(--white);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color), #0F4CD3);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(22, 93, 255, 0.3);
+        }
+
+        /* 英雄区 */
+        .hero {
+            padding: 5rem 8%;
+            background: linear-gradient(135deg, #EFF6FF 0%, #E0E7FF 100%);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 4rem;
+            min-height: 80vh;
+        }
+
+        .hero-content {
+            flex: 1;
+        }
+
+        .hero-title {
+            font-size: 3rem;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-title span {
+            color: var(--primary-color);
+        }
+
+        .hero-desc {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            max-width: 600px;
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .hero-img {
+            flex: 1;
+        }
+
+        .hero-img img {
+            width: 100%;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        /* 核心优势 */
+        .features {
+            padding: 6rem 8%;
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .section-desc {
+            color: var(--text-light);
+            max-width: 700px;
+            margin: 0 auto 4rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-title {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-desc {
+            color: var(--text-light);
+        }
+
+        /* 套餐价格 */
+        .pricing {
+            padding: 6rem 8%;
+            background-color: var(--white);
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .pricing-card {
+            border: 1px solid #E5E7EB;
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.3s;
+        }
+
+        .pricing-card:hover {
+            border-color: var(--primary-color);
+            box-shadow: 0 10px 25px rgba(22, 93, 255, 0.1);
+        }
+
+        .pricing-card.popular {
+            border-color: var(--primary-color);
+            background: linear-gradient(135deg, rgba(22, 93, 255, 0.05) 0%, rgba(15, 76, 211, 0.05) 100%);
+            position: relative;
+        }
+
+        .pricing-card.popular::before {
+            content: "热门推荐";
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 0.3rem 1.5rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+
+        .pricing-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .pricing-price {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        .pricing-price span {
+            font-size: 1rem;
+            font-weight: 400;
+            color: var(--text-light);
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .pricing-features li {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid #F3F4F6;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .pricing-features li svg {
+            color: var(--accent-color);
+        }
+
+        /* 页脚 */
+        .footer {
+            padding: 4rem 8%;
+            background-color: var(--text-dark);
+            color: var(--white);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-col h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            padding: 0.5rem 0;
+        }
+
+        .footer-col ul li a {
+            color: #D1D5DB;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--white);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #374151;
+            color: #9CA3AF;
+            font-size: 0.9rem;
+        }
+
+        /* 响应式适配 */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-wrap: wrap;
+            }
+            .nav-links {
+                display: none;
+            }
+            .hero {
+                flex-direction: column-reverse;
+                padding: 3rem 5%;
+                text-align: center;
+            }
+            .hero-title {
+                font-size: 2rem;
+            }
+            .hero-btns {
+                justify-content: center;
+            }
+            .section-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="logo">
+            中俄专线<span>NET</span>
+        </div>
+        <div class="nav-links">
+            <a href="#home">首页</a>
+            <a href="#features">核心优势</a>
+            <a href="#pricing">套餐价格</a>
+            <a href="#help">帮助中心</a>
+            <a href="#about">关于我们</a>
+        </div>
+        <div class="nav-actions">
+            <a href="#login" class="btn btn-outline">登录</a>
+            <a href="#register" class="btn btn-primary">立即注册</a>
+        </div>
+    </nav>
+
+    <!-- 英雄区 -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1 class="hero-title">在俄罗斯，<br>也能<span>像在国内一样</span>上网</h1>
+            <p class="hero-desc">专为在俄中国留学生、华人打造的合规专线服务，稳定使用国产APP，再也不会打不开抖音！小红书！哔哩哔哩，感受回国的网络体验。WhatsApp，telegram统统用</p>
+            <div class="hero-btns">
+                <a href="#pricing" class="btn btn-primary">选择套餐</a>
+                <a href="#trial" class="btn btn-outline">免费试用3天</a>
+            </div>
+        </div>
+        <div class="hero-img">
+            <img src="https://picsum.photos/800/600" alt="在俄罗斯流畅使用国内应用">
+        </div>
+    </section>
+
+    <!-- 核心优势 -->
+    <section class="features" id="features">
+        <h2 class="section-title">为什么选择我们的秋秋网络专线</h2>
+        <p class="section-desc">我们深耕中俄跨境网络服务，凭借合规资质和技术优势，为你提供稳定、高速、安全的网络体验</p>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h3 class="feature-title">高速稳定</h3>
+                <p class="feature-desc">专线直连国内骨干网络，低延迟、高带宽，4K视频流畅播放，游戏、视频通话不卡顿。</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🛡️</div>
+                <h3 class="feature-title">合规保障</h3>
+                <p class="feature-desc">拥有中俄双方法律许可资质，服务合法合规，无法律风险，使用更安心。</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📱</div>
+                <h3 class="feature-title">全平台支持</h3>
+                <p class="feature-desc">支持Windows、macOS、iOS、Android、路由器等全设备，一个账号多端使用。</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">💬</div>
+                <h3 class="feature-title">双语客服</h3>
+                <p class="feature-desc">7×24小时中俄双语技术支持，快速响应问题，解决你的网络困扰。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 套餐价格 -->
+    <section class="pricing" id="pricing">
+        <h2 class="section-title">灵活套餐，满足你的所有需求</h2>
+        <p class="section-desc">根据使用时长和带宽需求，选择最适合你的套餐，新用户首月享半价优惠</p>
+        <div class="pricing-grid">
+            <div class="pricing-card">
+                <h3 class="pricing-title">基础版</h3>
+                <div class="pricing-price">20元<span>/月</span></div>
+                <ul class="pricing-features">
+                    <li>✅ 100Mbps带宽</li>
+                    <li>✅ 单设备连接</li>
+                    <li>✅ 基础技术支持</li>
+                    <li>✅ 不限流量</li>
+                </ul>
+                <a href="#buy" class="btn btn-outline" style="width:100%; display:block; text-align:center;">立即购买</a>
+            </div>
+            <div class="pricing-card popular">
+                <h3 class="pricing-title">标准版</h3>
+                <div class="pricing-price">22元<span>/月</span></div>
+                <ul class="pricing-features">
+                    <li>✅ 300Mbps带宽</li>
+                    <li>✅ 3台设备同时连接</li>
+                    <li>✅ 7×24小时技术支持</li>
+                    <li>✅ 不限流量</li>
+                    <li>✅ 专属优化节点</li>
+                </ul>
+                <a href="#buy" class="btn btn-primary" style="width:100%; display:block; text-align:center;">立即购买</a>
+            </div>
+            <div class="pricing-card">
+                <h3 class="pricing-title">旗舰版</h3>
+                <div class="pricing-price">30元<span>/月</span></div>
+                <ul class="pricing-features">
+                    <li>✅ 1000Mbps带宽</li>
+                    <li>✅ 5台设备同时连接</li>
+                    <li>✅ 专属客服一对一</li>
+                    <li>✅ 不限流量</li>
+                    <li>✅ 定制化节点</li>
+                    <li>✅ 数据加密保护</li>
+                </ul>
+                <a href="#buy" class="btn btn-outline" style="width:100%; display:block; text-align:center;">立即购买</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h3>中俄专线NET</h3>
+                <p style="color:#D1D5DB; margin-top:1rem;">专为在俄华人打造的合规网络服务</p>
+            </div>
+            <div class="footer-col">
+                <h3>快速链接</h3>
+                <ul>
+                    <li><a href="#home">首页</a></li>
+                    <li><a href="#features">核心优势</a></li>
+                    <li><a href="#pricing">套餐价格</a></li>
+                    <li><a href="#about">关于我们</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>帮助中心</h3>
+                <ul>
+                    <li><a href="#faq">常见问题</a></li>
+                    <li><a href="#guide">使用教程</a></li>
+                    <li><a href="#contact">联系我们</a></li>
+                    <li><a href="#refund">退款政策</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>法律信息</h3>
+                <ul>
+                    <li><a href="#privacy">隐私政策</a></li>
+                    <li><a href="#terms">服务条款</a></li>
+                    <li><a href="#license">资质许可</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 中俄专线NET 版权所有 | 经营许可证：XXX-XXXX-XXXX</p>
+            <p style="margin-top:0.5rem;">遵守中俄两国法律法规，严禁用于非法用途</p>
+        </div>
+    </footer>
+</body>
+</html>
